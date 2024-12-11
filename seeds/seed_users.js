@@ -1,12 +1,17 @@
+const bcrypt = require('bcrypt')
+
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
 exports.seed = async function (knex) {
-  // Deletes ALL existing entries
+  const hashedPassword = await bcrypt.hash('your-password', 10)
   await knex('users').insert([
-    { email: 'john.doe@example.com', id: 1, name: 'John Doe' },
-    { email: 'jane.doe@example.com', id: 2, name: 'Jane Doe' },
-    { email: 'jim.doe@example.com', id: 3, name: 'Jim Doe' },
+    {
+      email: 'mharandal96@gmail.com',
+      id: 1,
+      name: 'John Doe',
+      password: hashedPassword,
+    },
   ])
 }
