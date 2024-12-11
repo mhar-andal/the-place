@@ -1,0 +1,38 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "next/core-web-vitals",
+    "next/typescript"
+  ],
+  "plugins": ["@typescript-eslint", "react", "prettier", "simple-import-sort", "sort-keys"],
+  "rules": {
+    "prettier/prettier": "error",
+    "sort-keys": 0, // disable default eslint sort-keys
+    "sort-keys/sort-keys-fix": 1,
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-empty-object-type": "off",
+    "import/no-anonymous-default-export": "off",
+    "@typescript-eslint/no-explicit-any": "off"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
