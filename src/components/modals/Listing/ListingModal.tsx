@@ -81,7 +81,7 @@ export default function NewListingModal({
   const form = useForm<z.infer<typeof listingFormSchema>>({
     defaultValues: {
       description: listing?.description || '',
-      id: listing?.id || '',
+      id: listing?.id || undefined,
       image: listing?.image || '',
       title: listing?.title || '',
     },

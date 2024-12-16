@@ -1,4 +1,4 @@
-import { promptFormSchema } from '@/components/modals/Listing/NewListing'
+import { promptFormSchema } from '@/components/modals/Listing/ListingModal'
 import { NextResponse } from 'next/server'
 import Replicate from 'replicate'
 import { z } from 'zod'

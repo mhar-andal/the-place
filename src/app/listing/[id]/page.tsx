@@ -4,7 +4,7 @@ import NewListingModal from '@/components/modals/Listing/NewListingModal'
 export default async function ViewListing({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) {
   const { id } = await params
   const listing = await getUsers(id)

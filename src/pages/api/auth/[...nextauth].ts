@@ -31,6 +31,7 @@ const options = {
   },
 }
 
+// @ts-expect-error: NextAuth
 export default (req, res) => NextAuth(req, res, options)
 
 async function getUserByEmail(email: string) {

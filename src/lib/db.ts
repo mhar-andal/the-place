@@ -1,4 +1,5 @@
-import knexfile from '../../knexfile'
+// eslint-disable-next-line
+const knexfile = require('../../knexfile')
 
 // eslint-disable-next-line
 const knex = require('knex')(

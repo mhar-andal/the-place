@@ -6,10 +6,10 @@ import { getUsers } from './getUsers'
 
 export async function PUT(
   request: Request,
-  { params }: { params: { slug: string } },
+  { params }: { params: Promise<{ slug: string }> },
 ) {
   const body = (await request.json()) as z.infer<typeof listingFormSchema>
-  const { slug } = params
+  const { slug } = await params
 
   await db('listings').where('id', slug).update({
     description: body.description,
@@ -22,9 +22,9 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { slug: string } },
+  { params }: { params: Promise<{ slug: string }> },
 ) {
-  const { slug } = params
+  const { slug } = await params
   await db('listings').where('id', slug).delete()
   return NextResponse.json({ message: 'Listing deleted' }, { status: 200 })
 }
