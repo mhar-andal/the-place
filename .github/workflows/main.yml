@@ -35,7 +35,7 @@ jobs:
       - name: Run migrations
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: pnpm ts-node ./node_modules/.bin/knex migrate:latest
+        run: knex migrate:latest
 
       - name: Run seeds
-        run: pnpm ts-node ./node_modules/.bin/knex seed:run
+        run: knex seed:run
