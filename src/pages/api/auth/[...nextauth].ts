@@ -12,7 +12,7 @@ const options = {
       async authorize(
         credentials: Record<'email' | 'password', string> | undefined,
       ) {
-        console.log('credentials', credentials)
+        if (!credentials) return null
         const user = await getUserByEmail(credentials.email)
         if (user && (await compare(credentials.password, user.password))) {
           return user
@@ -34,8 +34,6 @@ const options = {
 export default (req, res) => NextAuth(req, res, options)
 
 async function getUserByEmail(email: string) {
-  console.log('email', email)
   const user = await db('users').where('email', email).first()
-  console.log('user', user)
   return user
 }
