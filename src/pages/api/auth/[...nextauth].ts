@@ -5,7 +5,7 @@ import db from '@/lib/db'
 
 const options = {
   jwt: {
-    secret: process.env.JWT_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
   },
   providers: [
     Providers({
