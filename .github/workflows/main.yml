@@ -28,11 +28,14 @@ jobs:
         
       - name: Install Knex CLI
         run: pnpm add -g knex
+
+      - name: Install ts-node
+        run: pnpm add -g ts-node
         
       - name: Run migrations
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: pnpm knex migrate:latest
+        run: pnpm ts-node ./node_modules/.bin/knex migrate:latest
 
       - name: Run seeds
-        run: pnpm knex seed:run
+        run: pnpm ts-node ./node_modules/.bin/knex seed:run
