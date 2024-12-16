@@ -4,15 +4,6 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { getUsers } from './getUsers'
 
-export async function GET(
-  request: Request,
-  { params }: { params: { slug: string } },
-) {
-  const { slug } = params
-  const listing = await getUsers(slug)
-  return NextResponse.json(listing)
-}
-
 export async function PUT(
   request: Request,
   { params }: { params: { slug: string } },
