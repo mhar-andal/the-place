@@ -306,7 +306,7 @@ export default function NewListingModal({
                 <form
                   key="listing"
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-2"
+                  className="space-y-4"
                 >
                   <FormField
                     control={form.control}
