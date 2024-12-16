@@ -49,9 +49,3 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NODE_ENV: production
         run: knex migrate:latest
-
-      - name: Run seeds
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          NODE_ENV: production
-        run: knex seed:run
