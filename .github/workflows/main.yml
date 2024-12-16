@@ -9,15 +9,15 @@ on:
 jobs:
   migrate:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -37,7 +37,7 @@ jobs:
 
       - name: Install ts-node
         run: pnpm add -g ts-node
-        
+
       - name: Run migrations
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

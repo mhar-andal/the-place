@@ -8,7 +8,13 @@
     "next/core-web-vitals",
     "next/typescript"
   ],
-  "plugins": ["@typescript-eslint", "react", "prettier", "simple-import-sort", "sort-keys"],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "prettier",
+    "simple-import-sort",
+    "sort-keys"
+  ],
   "rules": {
     "prettier/prettier": "error",
     "sort-keys": 0, // disable default eslint sort-keys
