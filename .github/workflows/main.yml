@@ -18,16 +18,21 @@ jobs:
         with:
           node-version: '18'
           
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
         
       - name: Install Knex CLI
-        run: npm install -g knex
+        run: pnpm add -g knex
         
       - name: Run migrations
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: knex migrate:latest
+        run: pnpm knex migrate:latest
 
       - name: Run seeds
-        run: knex seed:run
+        run: pnpm knex seed:run
