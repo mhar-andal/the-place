@@ -5,6 +5,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+  workflow_call:
+    secrets:
+      DATABASE_URL:
+        description: 'A database url'
+        required: true
 
 jobs:
   migrate:
@@ -28,6 +33,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
 
       - name: Install dependencies
         run: pnpm install
