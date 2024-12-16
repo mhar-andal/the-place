@@ -1,4 +1,4 @@
-export default {
+const config = {
   development: {
     client: 'pg',
     connection: {
@@ -15,3 +15,5 @@ export default {
     connection: process.env.DATABASE_URL,
   },
 }
+
+export default config
