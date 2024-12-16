@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { getServerSession } from 'next-auth/next'
 
 import Providers from '../stores/Providers'
 
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import ListingLayout from '@/components/layout/ListingLayout'
+import { redirect } from 'next/navigation'
 
 const geistSans = Geist({
   subsets: ['latin'],
@@ -22,11 +24,16 @@ export const metadata: Metadata = {
   title: 'The Place',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const session = await getServerSession()
+
+  if (!session) {
+    redirect('/api/auth/signin')
+  }
   return (
     <html
       lang="en"

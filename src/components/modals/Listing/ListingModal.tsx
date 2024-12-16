@@ -66,6 +66,7 @@ export default function NewListingModal({
   const queryClient = useQueryClient()
   const [prediction, setPrediction] = useState<any>(null)
   const [error, setError] = useState(null)
+  const [submitting, setSubmitting] = useState(false)
 
   const [deleteShow, setDeleteShow] = useState(false)
 
@@ -134,6 +135,8 @@ export default function NewListingModal({
 
   // Listing Form Submit
   const onSubmit = async (values: z.infer<typeof listingFormSchema>) => {
+    if (submitting) return
+    setSubmitting(true)
     // POST: Create a new listing
     switch (type) {
       case 'new':
@@ -145,6 +148,7 @@ export default function NewListingModal({
           method: 'POST',
         }).then((res) => {
           if (res.ok) handleSuccess()
+          setSubmitting(false)
         })
         break
       case 'edit':
@@ -156,6 +160,7 @@ export default function NewListingModal({
           method: 'PUT',
         }).then((res) => {
           if (res.ok) handleSuccess()
+          setSubmitting(false)
         })
         break
       default:
@@ -306,7 +311,7 @@ export default function NewListingModal({
                 <form
                   key="listing"
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-4"
+                  className="mt-4 space-y-4"
                 >
                   <FormField
                     control={form.control}
@@ -340,8 +345,12 @@ export default function NewListingModal({
                       </FormItem>
                     )}
                   />
-                  <div className="pt-2">
-                    <Button variant="default" type="submit">
+                  <div>
+                    <Button
+                      disabled={submitting}
+                      variant="default"
+                      type="submit"
+                    >
                       Submit
                     </Button>
                     {type === 'edit' && (

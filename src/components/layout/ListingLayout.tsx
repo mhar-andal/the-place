@@ -2,7 +2,6 @@
 
 import { motion } from 'motion/react'
 import { useQuery } from '@tanstack/react-query'
-import { useSession } from 'next-auth/react'
 import { useTheme } from 'next-themes'
 import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
@@ -18,7 +17,6 @@ import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 
 export default function Home({ children }: { children: React.ReactNode }) {
-  const { data: session, status } = useSession()
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const router = useRouter()
@@ -30,13 +28,6 @@ export default function Home({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMounted(true)
   }, [])
-
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      // Redirect to login page
-      window.location.href = '/api/auth/signin'
-    }
-  }, [status])
 
   const Listings = useMemo(() => {
     if (listings?.length === 0)
