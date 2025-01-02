@@ -1,7 +1,8 @@
-import { promptFormSchema } from '@/components/modals/Listing/ListingModal'
 import { NextResponse } from 'next/server'
 import Replicate from 'replicate'
 import { z } from 'zod'
+
+import { promptFormSchema } from '@/components/form/schemas/ListingSchemas'
 
 const CONTROLLED_PROMPT = ', in the style of house architecture'
 

@@ -1,7 +1,8 @@
 import db from '@/lib/db'
 import { NextResponse } from 'next/server'
 
-import { listingFormSchema } from '@/components/modals/Listing/ListingModal'
+import { listingFormSchema } from '@/components/form/schemas/ListingSchemas'
+
 import { z } from 'zod'
 
 export async function GET(request: Request) {

@@ -33,24 +33,10 @@ import { ListingType } from './types'
 import { toast } from '@/hooks/use-toast'
 import { Listing } from '@/app/types/models/Listing'
 
+import { listingFormSchema } from '@/components/form/schemas/ListingSchemas'
+import { promptFormSchema } from '@/components/form/schemas/ListingSchemas'
+
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
-
-export const promptFormSchema = z.object({
-  prompt: z.string().min(4, {
-    message: 'Prompt must be at least 4 characters.',
-  }),
-})
-
-export const listingFormSchema = z.object({
-  description: z.string().min(4, {
-    message: 'Prompt must be at least 4 characters.',
-  }),
-  id: z.number().optional(),
-  image: z.string(),
-  title: z.string().min(4, {
-    message: 'Title must be at least 4 characters.',
-  }),
-})
 
 interface ListingModalProps {
   type: ListingType
@@ -101,13 +87,19 @@ export default function NewListingModal({
       },
       method: 'POST',
     })
+
     let prediction = await response.json()
+
+    // Set Error if the prediction fails
     if (response.status !== 201) {
       setError(prediction.detail)
       return
     }
+
+    // Set the prediction
     setPrediction(prediction)
 
+    // Wait for the prediction to finish
     while (
       prediction.status !== 'succeeded' &&
       prediction.status !== 'failed'
@@ -115,18 +107,23 @@ export default function NewListingModal({
       await sleep(1000)
       const response = await fetch('/api/predictions/' + prediction.id)
       prediction = await response.json()
+
+      // Set Error if the prediction fails
       if (response.status !== 200) {
         setError(prediction.detail)
         return
       }
+
+      // Set the prediction
       setPrediction(prediction)
     }
   }
 
   const handleSuccess = () => {
-    queryClient.invalidateQueries({ queryKey: ['listings'] })
     setOpen(false)
+    queryClient.invalidateQueries({ queryKey: ['listings'] })
     const action = type === 'new' ? 'created' : 'updated'
+
     toast({
       description: `Your listing has been ${action}`,
       title: `Listing ${action}`,
@@ -136,7 +133,9 @@ export default function NewListingModal({
   // Listing Form Submit
   const onSubmit = async (values: z.infer<typeof listingFormSchema>) => {
     if (submitting) return
+
     setSubmitting(true)
+
     // POST: Create a new listing
     switch (type) {
       case 'new':

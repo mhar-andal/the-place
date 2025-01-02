@@ -1,8 +1,8 @@
-import { listingFormSchema } from '@/components/modals/Listing/ListingModal'
 import db from '@/lib/db'
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
-import { getUsers } from './getUsers'
+
+import { listingFormSchema } from '@/components/form/schemas/ListingSchemas'
 
 export async function PUT(
   request: Request,
