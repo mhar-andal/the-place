@@ -122,8 +122,11 @@ export default function NewListingModal({
   const handleSuccess = () => {
     setOpen(false)
     queryClient.invalidateQueries({ queryKey: ['listings'] })
-    const action = type === 'new' ? 'created' : 'updated'
 
+    promptForm.reset()
+    form.reset()
+
+    const action = type === 'new' ? 'created' : 'updated'
     toast({
       description: `Your listing has been ${action}`,
       title: `Listing ${action}`,
